@@ -1,0 +1,10 @@
+<h1>Experiments</h1>
+
+<div class="labs-grid">
+  <% @labs.each do |lab| %>
+    <div class="lab-card">
+      <h2><%= link_to lab[:name], send(lab[:path]) %></h2>
+      <p><%= lab[:description] %></p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,26 @@
+<h1>Board Bootstrap</h1>
+<p>Describe what you want to manage and AI will suggest the optimal column structure for your Fizzy board.</p>
+
+<%= form_with model: @board_bootstrap, url: board_bootstrap_path, method: :post do |form| %>
+  <% if @board_bootstrap.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@board_bootstrap.errors.count, "error") %> prevented this from being submitted:</h2>
+      <ul>
+        <% @board_bootstrap.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description, "What do you want to manage?" %>
+    <%= form.text_area :description, rows: 5, placeholder: "e.g., I want to track blog post ideas from brainstorming through writing, editing, and publishing..." %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Generate Columns" %>
+  </div>
+<% end %>
+
+<p><%= link_to "Back to Labs", root_path %></p>
