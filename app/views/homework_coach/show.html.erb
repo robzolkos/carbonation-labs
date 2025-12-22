@@ -1,0 +1,16 @@
+<div class="success-page" data-controller="bubbles" data-bubbles-count-value="60">
+  <%= render "shared/success_heading" %>
+
+  <div class="success-card">
+    <p class="success-message">
+      Your study guide <strong><%= @board["name"] %></strong> is ready with <%= @board["card_count"] %> learning cards.
+      <br><br>
+      Start with the first card and work through at your own pace. You've got this!
+    </p>
+
+    <div class="success-actions">
+      <%= link_to "Start Learning", @board["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
+    </div>
+  </div>
+</div>

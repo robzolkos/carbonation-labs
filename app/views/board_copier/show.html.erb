@@ -1,0 +1,16 @@
+<div class="success-page" data-controller="bubbles" data-bubbles-count-value="60">
+  <%= render "shared/success_heading" %>
+
+  <div class="success-card">
+    <p class="success-message">
+      Copied <strong><%= @board["source_name"] %></strong> to <strong><%= @board["name"] %></strong>
+      with <%= @board["column_count"] %> columns and <%= @board["card_count"] %> cards.
+    </p>
+
+    <div class="success-actions">
+      <%= link_to "View Board in Fizzy", @board["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Copy Another", new_board_copier_path, class: "btn btn--secondary" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
+    </div>
+  </div>
+</div>

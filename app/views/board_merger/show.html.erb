@@ -1,0 +1,18 @@
+<div class="success-page" data-controller="bubbles" data-bubbles-count-value="60">
+  <%= render "shared/success_heading" %>
+
+  <div class="success-card">
+    <p class="success-message">
+      Moved <%= @result["cards_moved"] %> cards from <strong><%= @result["source_name"] %></strong> into <strong><%= @result["target_name"] %></strong>.
+      <% if @result["source_deleted"] %>
+        <br><br>
+        The source board has been deleted.
+      <% end %>
+    </p>
+
+    <div class="success-actions">
+      <%= link_to "View Board", @result["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
+    </div>
+  </div>
+</div>

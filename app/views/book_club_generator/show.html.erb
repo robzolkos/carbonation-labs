@@ -1,0 +1,14 @@
+<div class="success-page" data-controller="bubbles" data-bubbles-count-value="60">
+  <%= render "shared/success_heading" %>
+
+  <div class="success-card">
+    <p class="success-message">
+      Your board <strong><%= @board["name"] %></strong> has been created with <%= @board["card_count"] %> book recommendations.
+    </p>
+
+    <div class="success-actions">
+      <%= link_to "View Board in Fizzy", @board["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
+    </div>
+  </div>
+</div>

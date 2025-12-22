@@ -1,0 +1,16 @@
+<div class="success-page" data-controller="bubbles" data-bubbles-count-value="60">
+  <%= render "shared/success_heading" %>
+
+  <div class="success-card">
+    <p class="success-message">
+      Copied <%= @result["cards_moved"] %> cards from
+      <strong><%= @result["source_names"].to_sentence %></strong>
+      into <strong><%= @result["target_name"] %></strong>.
+    </p>
+
+    <div class="success-actions">
+      <%= link_to "View Board", @result["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
+    </div>
+  </div>
+</div>

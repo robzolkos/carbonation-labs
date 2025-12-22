@@ -1,0 +1,40 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Movie Quiz Generator</h1>
+    <p>Generate movie trivia questions for your next quiz night.</p>
+
+    <%= form_with model: @movie_quiz_generator, url: movie_quiz_generator_path, method: :post do |form| %>
+      <% if @movie_quiz_generator.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@movie_quiz_generator.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @movie_quiz_generator.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :topic, "What genre or decade?" %>
+        <%= form.text_field :topic, placeholder: "e.g., 80s action movies, sci-fi, 1990s comedies...", autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :teams, "Team names (comma-separated)" %>
+        <%= form.text_field :teams, placeholder: "e.g., The Cinephiles, Movie Buffs, Film Nerds" %>
+        <p class="hint">Each team becomes a column for scoring. Leave blank for solo play.</p>
+      </div>
+
+      <div class="field">
+        <%= form.label :question_count, "How many questions?" %>
+        <%= form.number_field :question_count, min: 5, max: 50, value: 20 %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Generate Quiz", data: { turbo_submits_with: "Generating..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

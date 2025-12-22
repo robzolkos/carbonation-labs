@@ -1,0 +1,30 @@
+<h1>Bulk Board Delete</h1>
+<p>Select boards to delete. This action cannot be undone.</p>
+
+<% if @boards.empty? %>
+  <p>No boards found in your account.</p>
+  <div class="actions">
+    <%= link_to "Back", root_path %>
+  </div>
+<% else %>
+  <%= form_with url: bulk_board_delete_path, method: :delete,
+                data: { controller: "bulk-delete", action: "submit->bulk-delete#confirmDelete" } do |form| %>
+
+    <div class="board-list">
+      <% @boards.each do |board| %>
+        <label class="board-item">
+          <%= check_box_tag "board_ids[]", board["id"], false,
+                            data: { action: "change->bulk-delete#toggle", bulk_delete_target: "checkbox" } %>
+          <span class="board-name"><%= board["name"] %></span>
+        </label>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= link_to "Cancel", root_path %>
+      <button type="submit" class="btn btn--danger hidden" data-bulk-delete-target="deleteButton">
+        Delete <span data-bulk-delete-target="count">0</span> Board(s)
+      </button>
+    </div>
+  <% end %>
+<% end %>

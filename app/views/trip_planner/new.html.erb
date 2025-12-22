@@ -1,0 +1,42 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Trip Planner</h1>
+    <p>Get a detailed day-by-day itinerary for your next adventure.</p>
+
+    <%= form_with model: @trip_planner, url: trip_planner_path, method: :post do |form| %>
+      <% if @trip_planner.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@trip_planner.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @trip_planner.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :destination, "Where are you going?" %>
+        <%= form.text_field :destination, placeholder: "e.g., Tokyo, Japan or Barcelona, Spain", autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :trip_length, "How long is your trip?" %>
+        <%= form.select :trip_length,
+              options_for_select(TripPlanner::TRIP_LENGTHS, @trip_planner.trip_length),
+              { prompt: "Select trip length..." } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :interests, "What are you interested in? (optional)" %>
+        <%= form.text_area :interests, rows: 3, placeholder: "e.g., local food, museums, hiking, nightlife, photography, historical sites..." %>
+        <p class="hint">Tell us what you enjoy and we'll tailor recommendations.</p>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Plan My Trip", data: { turbo_submits_with: "Planning your adventure..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

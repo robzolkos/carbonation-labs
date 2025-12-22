@@ -1,0 +1,138 @@
+/*
+ * Form input styles.
+ * Text inputs, selects, textareas, checkboxes, switches.
+ */
+@layer components {
+  /* Form page wrapper */
+  .form-page {
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  /* Form panel - brutalist card */
+  .form-panel {
+    background: #fff;
+    border: 4px solid #000;
+    padding: 2rem;
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  .form-panel h1 {
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-panel > p {
+    color: #555;
+    text-align: center;
+    text-wrap: balance;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-panel .field label {
+    color: #1a1a1a;
+  }
+
+  .form-panel .hint {
+    color: #666;
+  }
+
+  .form-panel .actions {
+    justify-content: center;
+  }
+
+  .form-panel .actions a {
+    color: #1a1a1a;
+  }
+
+  /* Field wrapper */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-block: 1rem;
+  }
+
+  /* Labels */
+  .field label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* Text inputs, selects, and textareas */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="url"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    color: #1a1a1a;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: var(--color-accent-dark);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #888;
+    opacity: 1;
+  }
+
+  /* Actions wrapper */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-block: 1.5rem;
+  }
+
+  .actions a {
+    font-family: var(--font-body);
+  }
+
+  /* Errors */
+  .errors {
+    background: #fee2e2;
+    border: 2px solid #dc2626;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-block: 1rem;
+  }
+
+  .errors h2 {
+    color: #dc2626;
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .errors ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .errors li {
+    color: #dc2626;
+  }
+}

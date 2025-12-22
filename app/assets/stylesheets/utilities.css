@@ -1,0 +1,30 @@
+@layer utilities {
+  /* Text */
+
+  /* Flexbox and Grid */
+
+  /* Sizing */
+
+  /* Overflow */
+
+  /* Padding */
+
+  /* Margins */
+
+  /* Position */
+
+  /* Fills */
+
+  /* Borders */
+
+  /* Shadows */
+
+  /* Lists */
+
+  /* Accessibility */
+
+  /* Visibility */
+  .hidden {
+    display: none !important;
+  }
+}

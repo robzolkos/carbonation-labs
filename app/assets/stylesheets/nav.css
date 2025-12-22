@@ -1,0 +1,65 @@
+/*
+ * Navigation styles.
+ * Header nav, menus, mobile nav.
+ */
+@layer components {
+  .site-header {
+    padding-block: 1.5rem;
+    text-align: center;
+  }
+
+  .site-header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .site-title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--color-heading);
+    text-decoration: none;
+  }
+
+  .site-title:hover {
+    color: var(--color-heading);
+    text-decoration: none;
+  }
+
+  .site-title__heading {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .site-title svg {
+    width: 6rem;
+    height: 4rem;
+    position: absolute;
+    right: 100%;
+    margin-right: -0.5rem;
+    transform: translateY(4px);
+  }
+
+  .site-title__name {
+    display: inline;
+  }
+
+  .site-title__labs {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+  }
+
+  .tagline {
+    font-family: var(--font-tagline);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-heading);
+    margin-top: -0.25rem;
+  }
+}

@@ -1,0 +1,37 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Homework Coach</h1>
+    <p>Struggling with something? Let's break it down together, step by step.</p>
+
+    <%= form_with model: @homework_coach, url: homework_coach_path, method: :post do |form| %>
+      <% if @homework_coach.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@homework_coach.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @homework_coach.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :grade_level, "What grade are you in?" %>
+        <%= form.select :grade_level,
+              options_for_select(HomeworkCoach::GRADE_LEVELS, @homework_coach.grade_level),
+              { prompt: "Select your grade level..." }, { autofocus: true } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :struggle, "What are you struggling with?" %>
+        <%= form.text_area :struggle, rows: 4, placeholder: "e.g., I don't understand how fractions work, or I'm confused about the causes of World War I, or I can't figure out how to structure an essay..." %>
+        <p class="hint">Be as specific as you can - the more details you share, the better we can help!</p>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Help Me Understand", data: { turbo_submits_with: "Creating your study guide..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

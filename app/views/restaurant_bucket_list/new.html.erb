@@ -1,0 +1,29 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Restaurant Bucket List</h1>
+    <p>Enter a city and your cuisine preferences to discover must-try restaurants.</p>
+
+    <%= form_with model: @restaurant_bucket_list, url: restaurant_bucket_list_path, method: :post do |form| %>
+      <% if @restaurant_bucket_list.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@restaurant_bucket_list.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @restaurant_bucket_list.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :location_preferences, "Where and what do you want to eat?" %>
+        <%= form.text_area :location_preferences, rows: 5, placeholder: "e.g., San Francisco, love sushi and Italian, open to fine dining and casual spots...", autofocus: true %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Find Restaurants", data: { turbo_submits_with: "Working..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

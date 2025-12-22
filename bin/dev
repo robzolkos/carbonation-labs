@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+FileUtils.chdir(APP_ROOT)
+
+# Run both web and jobs using foreman-style process management
+if system("which foreman > /dev/null 2>&1")
+  exec "foreman start -f Procfile.dev"
+else
+  puts "Installing foreman..."
+  system("gem install foreman")
+  exec "foreman start -f Procfile.dev"
+end

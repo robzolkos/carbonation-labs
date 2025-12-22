@@ -1,0 +1,19 @@
+/*
+ * Layout styles.
+ * Page structure, containers, grid systems.
+ */
+@layer base {
+  body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100dvh;
+  }
+
+  #main {
+    margin-inline: auto;
+    max-inline-size: 100ch;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+    width: 100%;
+  }
+}

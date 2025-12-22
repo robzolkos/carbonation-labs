@@ -1,0 +1,36 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Email to Tasks</h1>
+    <p>Paste an email or message and extract all the action items.</p>
+
+    <%= form_with model: @email_to_tasks, url: email_to_tasks_path, method: :post do |form| %>
+      <% if @email_to_tasks.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@email_to_tasks.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @email_to_tasks.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :email_content, "Paste your email or message" %>
+        <%= form.text_area :email_content, rows: 10, placeholder: "Paste the email content here...", autofocus: true %>
+        <p class="hint">Include the full email thread for best results.</p>
+      </div>
+
+      <div class="field">
+        <%= form.label :board_name, "Board name (optional)" %>
+        <%= form.text_field :board_name, placeholder: "e.g., Project X Tasks, Follow-ups from meeting..." %>
+        <p class="hint">Leave blank to auto-generate from the email content.</p>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Extract Tasks", data: { turbo_submits_with: "Extracting tasks..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+/*
+ * Button component styles.
+ */
+@layer components {
+  /* Base button styles for all buttons and submit inputs */
+  button,
+  input[type="submit"],
+  .btn {
+    align-items: center;
+    background: #000;
+    border-radius: 0.5rem;
+    border: 2px solid #000;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    gap: 0.5em;
+    justify-content: center;
+    padding: 0.6em 1.25em;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  }
+
+  button:hover,
+  input[type="submit"]:hover,
+  .btn:hover {
+    background: #333;
+    border-color: #333;
+    color: #fff;
+  }
+
+  button:active,
+  input[type="submit"]:active,
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  button:focus-visible,
+  input[type="submit"]:focus-visible,
+  .btn:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Secondary button - outline style */
+  .btn--secondary {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .btn--secondary:hover {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Primary button - emphasized action */
+  .btn--primary {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: white;
+  }
+
+  .btn--primary:hover {
+    background: #15803d;
+    border-color: #15803d;
+  }
+
+  /* Danger button - red for destructive actions */
+  .btn--danger {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: white;
+  }
+
+  .btn--danger:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+  }
+}

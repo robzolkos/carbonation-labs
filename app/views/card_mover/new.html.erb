@@ -1,0 +1,33 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Card Mover</h1>
+    <p>Copy cards from one or more boards into a single target board.</p>
+
+    <%= form_with url: card_mover_path, method: :post do |form| %>
+      <div class="field">
+        <%= form.label :source_board_ids, "Select source boards (cards will be copied from these)" %>
+        <div class="board-list">
+          <% @boards.each do |board| %>
+            <label class="board-item">
+              <%= check_box_tag "source_board_ids[]", board["id"], false %>
+              <span class="board-name"><%= board["name"] %></span>
+              <span class="board-count"><%= board["card_count"] %> cards</span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :target_board_id, "Target board (cards will be added here)" %>
+        <%= form.select :target_board_id,
+              options_for_select(@boards.map { |b| [b["name"], b["id"]] }),
+              { prompt: "Select target board..." } %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Move Cards", data: { turbo_submits_with: "Moving...", turbo_confirm: "This will copy all cards from the selected boards to the target board. Continue?" } %>
+      </div>
+    <% end %>
+  </div>
+</div>
