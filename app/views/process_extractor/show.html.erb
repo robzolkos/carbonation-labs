@@ -1,0 +1,46 @@
+<h1>Process Research Results</h1>
+<p>Here's what we found for: <strong><%= @description %></strong></p>
+
+<%= form_with url: confirm_process_extractor_path, method: :post do |form| %>
+  <div class="field">
+    <%= form.label :board_name, "Board Name" %>
+    <%= form.text_field :board_name, value: @board_name, required: true %>
+  </div>
+
+  <% if @columns.any? %>
+    <h2>Suggested Columns</h2>
+    <p class="hint">These columns will be added in addition to the default Not Now, Maybe?, and Done columns.</p>
+    <div class="board-preview">
+      <% @columns.each do |column| %>
+        <div class="column column--<%= column["color"] %>">
+          <h3><%= column["name"] %></h3>
+          <p class="column-purpose"><%= column["purpose"] %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <h2>Cards (<%= @cards.size %> steps)</h2>
+  <p class="hint">Each card represents a step in the process. Cards will be created in the Maybe? column.</p>
+
+  <div class="cards-preview">
+    <% @cards.each_with_index do |card, index| %>
+      <div class="card-preview">
+        <div class="card-header">
+          <span class="card-number"><%= index + 1 %></span>
+          <h3 class="card-title"><%= card["title"] %></h3>
+        </div>
+        <div class="card-description"><%= sanitize(card["description"], tags: %w[p h4 h5 ul ol li a strong em br], attributes: %w[href target]) %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form.hidden_field :columns, value: @columns.to_json %>
+  <%= form.hidden_field :cards, value: @cards.to_json %>
+
+  <div class="actions">
+    <%= link_to "Cancel", root_path %>
+    <%= link_to "Start Over", new_process_extractor_path %>
+    <%= form.submit "Create Board in Fizzy" %>
+  </div>
+<% end %>

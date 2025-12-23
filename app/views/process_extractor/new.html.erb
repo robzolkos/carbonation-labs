@@ -1,0 +1,25 @@
+<h1>Process Extractor</h1>
+<p>Enter a process you want to track and AI will research the official steps, creating a board with cards for each one.</p>
+
+<%= form_with model: @process_extractor, url: process_extractor_path, method: :post do |form| %>
+  <% if @process_extractor.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@process_extractor.errors.count, "error") %> prevented this from being submitted:</h2>
+      <ul>
+        <% @process_extractor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :process_description, "What process do you want to track?" %>
+    <%= form.text_area :process_description, rows: 5, placeholder: "e.g., Getting a California Driver's License, Filing US taxes as a freelancer, Starting an LLC in Delaware..." %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Cancel", root_path %>
+    <%= form.submit "Research Process" %>
+  </div>
+<% end %>

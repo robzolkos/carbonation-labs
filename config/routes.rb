@@ -18,4 +18,14 @@ Rails.application.routes.draw do
   resource :board_bootstrap, only: [:new, :create, :show], controller: "board_bootstrap" do
     post :confirm
   end
+
+  # Process Extractor Lab
+  resource :process_extractor, only: [:new, :create, :show], controller: "process_extractor" do
+    post :confirm
+  end
+
+  # Bulk Board Delete Lab
+  resource :bulk_board_delete, only: [:show], controller: "bulk_board_delete" do
+    delete :destroy
+  end
 end

@@ -27,49 +27,90 @@
     <header class="site-header">
       <nav>
         <%= link_to root_path, class: "site-title" do %>
-          <svg viewBox="0 0 600 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Orange bubbles (left tube) -->
-            <circle cx="100" cy="25" r="14" fill="#ff6b00" stroke="#cc5500" stroke-width="3"/>
-            <circle cx="150" cy="5" r="10" fill="#ffaa00" stroke="#ff6b00" stroke-width="2"/>
-            <circle cx="180" cy="-12" r="9" fill="#ffcc00" stroke="#ff6b00" stroke-width="2"/>
-            <!-- Blue bubbles (center tube) -->
-            <circle cx="260" cy="0" r="12" fill="#00d4ff" stroke="#00a8cc" stroke-width="3"/>
-            <circle cx="320" cy="20" r="14" fill="#00d4ff" stroke="#00a8cc" stroke-width="3"/>
-            <circle cx="290" cy="-15" r="9" fill="#80eaff" stroke="#00d4ff" stroke-width="2"/>
-            <circle cx="350" cy="5" r="10" fill="#80eaff" stroke="#00d4ff" stroke-width="2"/>
-            <!-- Green bubbles (right tube) -->
-            <circle cx="440" cy="28" r="15" fill="#39ff14" stroke="#2ecc00" stroke-width="3"/>
-            <circle cx="500" cy="12" r="10" fill="#7fff00" stroke="#39ff14" stroke-width="2"/>
-            <circle cx="470" cy="-8" r="11" fill="#b3ff66" stroke="#39ff14" stroke-width="2"/>
-            <!-- Left tube (tilted left) - ORANGE -->
-            <g transform="rotate(-15 200 250)">
-              <path d="M160 80 L160 280 Q160 360 220 360 Q280 360 280 280 L280 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
-              <path d="M172 180 L172 280 Q172 340 220 340 Q268 340 268 280 L268 180 Z" fill="#ff6b00"/>
-              <circle cx="200" cy="240" r="10" fill="#ffaa00"/>
-              <circle cx="230" cy="280" r="7" fill="#ffcc00"/>
-              <circle cx="210" cy="310" r="8" fill="#ffaa00"/>
-              <rect x="145" y="60" width="150" height="20" rx="6" fill="currentColor"/>
+          <svg viewBox="0 -30 380 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Bubbles for each tube -->
+            <!-- Dark blue bubbles -->
+            <circle cx="25" cy="25" r="9" fill="#4f7cff" stroke="#1e40af" stroke-width="2"/>
+            <circle cx="50" cy="5" r="7" fill="#6b8fff" stroke="#1e40af" stroke-width="1.5"/>
+            <circle cx="40" cy="-12" r="5" fill="#93b4ff" stroke="#1e40af" stroke-width="1"/>
+            <!-- Pink bubbles -->
+            <circle cx="90" cy="18" r="10" fill="#ff6b9d" stroke="#db2777" stroke-width="2"/>
+            <circle cx="115" cy="0" r="8" fill="#ff8fb3" stroke="#db2777" stroke-width="1.5"/>
+            <circle cx="100" cy="-15" r="6" fill="#ffb3cc" stroke="#db2777" stroke-width="1"/>
+            <circle cx="130" cy="-8" r="5" fill="#ff8fb3" stroke="#db2777" stroke-width="1"/>
+            <!-- Orange bubbles -->
+            <circle cx="170" cy="15" r="11" fill="#ff6b00" stroke="#cc5500" stroke-width="2"/>
+            <circle cx="200" cy="-5" r="8" fill="#ff8533" stroke="#cc5500" stroke-width="1.5"/>
+            <circle cx="185" cy="30" r="7" fill="#ffa366" stroke="#cc5500" stroke-width="1.5"/>
+            <circle cx="215" cy="-20" r="6" fill="#ff8533" stroke="#cc5500" stroke-width="1"/>
+            <circle cx="175" cy="-10" r="5" fill="#ffa366" stroke="#cc5500" stroke-width="1"/>
+            <!-- Green bubbles -->
+            <circle cx="260" cy="20" r="10" fill="#4ade80" stroke="#16a34a" stroke-width="2"/>
+            <circle cx="285" cy="2" r="7" fill="#6ee7a0" stroke="#16a34a" stroke-width="1.5"/>
+            <circle cx="270" cy="-12" r="6" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+            <circle cx="295" cy="-18" r="5" fill="#6ee7a0" stroke="#16a34a" stroke-width="1"/>
+            <!-- Teal bubbles -->
+            <circle cx="335" cy="18" r="10" fill="#2dd4bf" stroke="#0d9488" stroke-width="2"/>
+            <circle cx="360" cy="0" r="8" fill="#5eead4" stroke="#0d9488" stroke-width="1.5"/>
+            <circle cx="345" cy="-15" r="6" fill="#99f6e4" stroke="#0d9488" stroke-width="1"/>
+            <circle cx="375" cy="-10" r="5" fill="#5eead4" stroke="#0d9488" stroke-width="1"/>
+
+            <!-- Tube 1: Dark Blue (tilted left, ~50% full) -->
+            <g transform="rotate(-15 55 200)">
+              <path d="M20 50 L20 220 Q20 280 55 280 Q90 280 90 220 L90 50 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="5"/>
+              <path d="M28 165 L28 220 Q28 268 55 268 Q82 268 82 220 L82 165 Z" fill="#1e40af"/>
+              <circle cx="45" cy="195" r="6" fill="#3b82f6"/>
+              <circle cx="68" cy="230" r="5" fill="#60a5fa"/>
+              <circle cx="50" cy="250" r="4" fill="#3b82f6"/>
+              <rect x="10" y="35" width="90" height="15" rx="4" fill="currentColor"/>
             </g>
-            <!-- Center tube (upright) - BLUE -->
-            <g transform="translate(80 0)">
-              <path d="M180 80 L180 300 Q180 390 256 390 Q332 390 332 300 L332 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
-              <path d="M192 190 L192 300 Q192 370 256 370 Q320 370 320 300 L320 190 Z" fill="#00d4ff"/>
-              <circle cx="230" cy="260" r="10" fill="#80eaff"/>
-              <circle cx="270" cy="300" r="7" fill="#b3f0ff"/>
-              <circle cx="250" cy="340" r="9" fill="#80eaff"/>
-              <rect x="160" y="60" width="192" height="20" rx="6" fill="currentColor"/>
+
+            <!-- Tube 2: Pink (tilted slightly left, ~90% full) -->
+            <g transform="rotate(-6 115 200)">
+              <path d="M80 50 L80 220 Q80 280 115 280 Q150 280 150 220 L150 50 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="5"/>
+              <path d="M88 75 L88 220 Q88 268 115 268 Q142 268 142 220 L142 75 Z" fill="#db2777"/>
+              <circle cx="102" cy="110" r="6" fill="#ec4899"/>
+              <circle cx="125" cy="160" r="5" fill="#f472b6"/>
+              <circle cx="100" cy="200" r="5" fill="#ec4899"/>
+              <circle cx="128" cy="240" r="4" fill="#f472b6"/>
+              <rect x="70" y="35" width="90" height="15" rx="4" fill="currentColor"/>
             </g>
-            <!-- Right tube (tilted right) - GREEN -->
-            <g transform="rotate(12 400 250)">
-              <path d="M340 80 L340 280 Q340 360 400 360 Q460 360 460 280 L460 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
-              <path d="M352 200 L352 280 Q352 340 400 340 Q448 340 448 280 L448 200 Z" fill="#39ff14"/>
-              <circle cx="380" cy="250" r="10" fill="#7fff00"/>
-              <circle cx="410" cy="290" r="7" fill="#b3ff66"/>
-              <circle cx="390" cy="315" r="8" fill="#7fff00"/>
-              <rect x="325" y="60" width="150" height="20" rx="6" fill="currentColor"/>
+
+            <!-- Tube 3: Orange (upright, ~60% full) -->
+            <g transform="translate(0 0)">
+              <path d="M160 50 L160 220 Q160 280 195 280 Q230 280 230 220 L230 50 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="5"/>
+              <path d="M168 140 L168 220 Q168 268 195 268 Q222 268 222 220 L222 140 Z" fill="#ff6b00"/>
+              <circle cx="182" cy="175" r="6" fill="#ff8533"/>
+              <circle cx="208" cy="210" r="5" fill="#ffa366"/>
+              <circle cx="185" cy="245" r="5" fill="#ff8533"/>
+              <rect x="150" y="35" width="90" height="15" rx="4" fill="currentColor"/>
+            </g>
+
+            <!-- Tube 4: Green (tilted slightly right, ~95% full) -->
+            <g transform="rotate(7 275 200)">
+              <path d="M240 50 L240 220 Q240 280 275 280 Q310 280 310 220 L310 50 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="5"/>
+              <path d="M248 75 L248 220 Q248 268 275 268 Q302 268 302 220 L302 75 Z" fill="#16a34a"/>
+              <circle cx="262" cy="110" r="5" fill="#22c55e"/>
+              <circle cx="288" cy="155" r="4" fill="#4ade80"/>
+              <circle cx="260" cy="195" r="5" fill="#22c55e"/>
+              <circle cx="290" cy="235" r="4" fill="#4ade80"/>
+              <rect x="230" y="35" width="90" height="15" rx="4" fill="currentColor"/>
+            </g>
+
+            <!-- Tube 5: Teal (tilted right, ~70% full) -->
+            <g transform="rotate(16 335 200)">
+              <path d="M300 50 L300 220 Q300 280 335 280 Q370 280 370 220 L370 50 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="5"/>
+              <path d="M308 120 L308 220 Q308 268 335 268 Q362 268 362 220 L362 120 Z" fill="#0d9488"/>
+              <circle cx="322" cy="155" r="5" fill="#14b8a6"/>
+              <circle cx="350" cy="195" r="4" fill="#2dd4bf"/>
+              <circle cx="325" cy="235" r="5" fill="#14b8a6"/>
+              <rect x="290" y="35" width="90" height="15" rx="4" fill="currentColor"/>
             </g>
           </svg>
-          Carbonation Labs
+          <span class="site-title__text">
+            Carbonation Labs
+            <span class="tagline">Add more bubbles to your boards!</span>
+          </span>
         <% end %>
       </nav>
     </header>

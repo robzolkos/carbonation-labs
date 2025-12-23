@@ -55,4 +55,16 @@
     background: var(--color-heading);
     color: var(--color-background);
   }
+
+  /* Danger button - red for destructive actions */
+  .btn--danger {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: white;
+  }
+
+  .btn--danger:hover {
+    background: #b91c1c;
+    border-color: #b91c1c;
+  }
 }

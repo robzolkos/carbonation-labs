@@ -4,7 +4,7 @@ class LabsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get root_path
     assert_response :success
-    assert_select "h1", "Experiments"
+    assert_select ".labs-grid"
   end
 
   test "should list all labs" do
