@@ -3,20 +3,52 @@
  * Builds on reset.css with your app's defaults.
  */
 @layer base {
-  /* body {
-    background: var(--color-canvas);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-  } */
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
 
-  /* a {
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-block: 1rem 1.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-block: 1rem 1rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-block: 0.75rem 0.5rem;
+  }
+
+  a {
     color: var(--color-link);
     text-decoration: underline;
     text-decoration-skip-ink: auto;
-  } */
+  }
 
-  /* :focus-visible {
-    outline: var(--focus-ring);
+  a:hover {
+    color: var(--color-link-hover);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-dark);
     outline-offset: 2px;
-  } */
+  }
+
+  p {
+    margin-block: 0.5rem;
+  }
 }

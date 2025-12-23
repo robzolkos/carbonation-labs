@@ -1,3 +1,25 @@
-<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="256" cy="256" r="256" fill="red"/>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Escaping bubbles (carbonation) -->
+  <circle cx="140" cy="25" r="16" fill="#0ea5e9" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="180" cy="8" r="12" fill="#38bdf8" stroke="#0ea5e9" stroke-width="2"/>
+  <circle cx="215" cy="35" r="18" fill="#0ea5e9" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="250" cy="5" r="14" fill="#0ea5e9" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="290" cy="28" r="16" fill="#0ea5e9" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="330" cy="12" r="12" fill="#38bdf8" stroke="#0ea5e9" stroke-width="2"/>
+  <circle cx="370" cy="30" r="14" fill="#0ea5e9" stroke="#0284c7" stroke-width="3"/>
+  <circle cx="200" cy="-15" r="10" fill="#38bdf8" stroke="#0ea5e9" stroke-width="2"/>
+  <circle cx="270" cy="-10" r="11" fill="#38bdf8" stroke="#0ea5e9" stroke-width="2"/>
+  <circle cx="340" cy="-5" r="9" fill="#38bdf8" stroke="#0ea5e9" stroke-width="2"/>
+  <!-- Test tube outline -->
+  <path d="M180 80 L180 320 Q180 420 256 420 Q332 420 332 320 L332 80"
+        fill="none" stroke="#1a1a1a" stroke-width="24" stroke-linecap="round"/>
+  <!-- Light blue liquid -->
+  <path d="M192 200 L192 320 Q192 396 256 396 Q320 396 320 320 L320 200 Z"
+        fill="#7dd3fc"/>
+  <!-- Bubbles inside liquid -->
+  <circle cx="230" cy="280" r="12" fill="#bae6fd"/>
+  <circle cx="270" cy="320" r="8" fill="#bae6fd"/>
+  <circle cx="250" cy="360" r="10" fill="#bae6fd"/>
+  <!-- Top rim -->
+  <rect x="160" y="60" width="192" height="24" rx="8" fill="#1a1a1a"/>
 </svg>

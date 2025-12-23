@@ -4,41 +4,18 @@
  * Reference: https://oklch.com/
  */
 :root {
-  /* LCH color primitives - raw OKLCH values without oklch() wrapper */
-  /*
-  --lch-red-darkest: 26% 0.105 34;
-  --lch-red-dark: 59% 0.19 38;
-  --lch-red: 66% 0.204 40;
-  --lch-red-light: 84% 0.0837 42;
-  --lch-red-lightest: 96% 0.013 46;
+  /* Background - pale yellow post-it note */
+  --color-background: #fffde7;
 
-  --lch-blue-darkest: 26% 0.126 264;
-  --lch-blue-dark: 57% 0.1895 260;
-  --lch-blue: 66% 0.196 258;
-  --lch-blue-light: 84% 0.0719 255;
-  --lch-blue-lightest: 96% 0.016 252;
-  */
+  /* Text colors */
+  --color-text: #1a1a1a;
+  --color-heading: #000000;
 
-  /* Named colors - semantic colors built from LCH primitives */
-  /*
-  --color-success: oklch(var(--lch-green-dark));
-  --color-warning: oklch(var(--lch-yellow-dark));
-  --color-error: oklch(var(--lch-red-dark));
-  --color-info: oklch(var(--lch-blue-dark));
-  */
+  /* Accent - light blue for test tube */
+  --color-accent: #7dd3fc;
+  --color-accent-dark: #0ea5e9;
 
-  /* Abstractions - semantic purpose-based colors */
-  /*
-  --color-text: oklch(...);
-  --color-text-secondary: oklch(...);
-  --color-background: oklch(...);
-  --color-border: oklch(...);
-  --color-link: oklch(var(--lch-blue-dark));
-  */
-
-  /* Component-specific colors */
-  /*
-  --color-button-bg: oklch(var(--lch-blue-dark));
-  --color-input-border: oklch(var(--lch-gray-light));
-  */
+  /* Links */
+  --color-link: #0369a1;
+  --color-link-hover: #0284c7;
 }

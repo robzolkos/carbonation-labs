@@ -26,7 +26,51 @@
   <body>
     <header class="site-header">
       <nav>
-        <%= link_to "Carbonation Labs", root_path, class: "site-title" %>
+        <%= link_to root_path, class: "site-title" do %>
+          <svg viewBox="0 0 600 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Orange bubbles (left tube) -->
+            <circle cx="100" cy="25" r="14" fill="#ff6b00" stroke="#cc5500" stroke-width="3"/>
+            <circle cx="150" cy="5" r="10" fill="#ffaa00" stroke="#ff6b00" stroke-width="2"/>
+            <circle cx="180" cy="-12" r="9" fill="#ffcc00" stroke="#ff6b00" stroke-width="2"/>
+            <!-- Blue bubbles (center tube) -->
+            <circle cx="260" cy="0" r="12" fill="#00d4ff" stroke="#00a8cc" stroke-width="3"/>
+            <circle cx="320" cy="20" r="14" fill="#00d4ff" stroke="#00a8cc" stroke-width="3"/>
+            <circle cx="290" cy="-15" r="9" fill="#80eaff" stroke="#00d4ff" stroke-width="2"/>
+            <circle cx="350" cy="5" r="10" fill="#80eaff" stroke="#00d4ff" stroke-width="2"/>
+            <!-- Green bubbles (right tube) -->
+            <circle cx="440" cy="28" r="15" fill="#39ff14" stroke="#2ecc00" stroke-width="3"/>
+            <circle cx="500" cy="12" r="10" fill="#7fff00" stroke="#39ff14" stroke-width="2"/>
+            <circle cx="470" cy="-8" r="11" fill="#b3ff66" stroke="#39ff14" stroke-width="2"/>
+            <!-- Left tube (tilted left) - ORANGE -->
+            <g transform="rotate(-15 200 250)">
+              <path d="M160 80 L160 280 Q160 360 220 360 Q280 360 280 280 L280 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
+              <path d="M172 180 L172 280 Q172 340 220 340 Q268 340 268 280 L268 180 Z" fill="#ff6b00"/>
+              <circle cx="200" cy="240" r="10" fill="#ffaa00"/>
+              <circle cx="230" cy="280" r="7" fill="#ffcc00"/>
+              <circle cx="210" cy="310" r="8" fill="#ffaa00"/>
+              <rect x="145" y="60" width="150" height="20" rx="6" fill="currentColor"/>
+            </g>
+            <!-- Center tube (upright) - BLUE -->
+            <g transform="translate(80 0)">
+              <path d="M180 80 L180 300 Q180 390 256 390 Q332 390 332 300 L332 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
+              <path d="M192 190 L192 300 Q192 370 256 370 Q320 370 320 300 L320 190 Z" fill="#00d4ff"/>
+              <circle cx="230" cy="260" r="10" fill="#80eaff"/>
+              <circle cx="270" cy="300" r="7" fill="#b3f0ff"/>
+              <circle cx="250" cy="340" r="9" fill="#80eaff"/>
+              <rect x="160" y="60" width="192" height="20" rx="6" fill="currentColor"/>
+            </g>
+            <!-- Right tube (tilted right) - GREEN -->
+            <g transform="rotate(12 400 250)">
+              <path d="M340 80 L340 280 Q340 360 400 360 Q460 360 460 280 L460 80 Z" fill="#f5f5f5" stroke="currentColor" stroke-width="8"/>
+              <path d="M352 200 L352 280 Q352 340 400 340 Q448 340 448 280 L448 200 Z" fill="#39ff14"/>
+              <circle cx="380" cy="250" r="10" fill="#7fff00"/>
+              <circle cx="410" cy="290" r="7" fill="#b3ff66"/>
+              <circle cx="390" cy="315" r="8" fill="#7fff00"/>
+              <rect x="325" y="60" width="150" height="20" rx="6" fill="currentColor"/>
+            </g>
+          </svg>
+          Carbonation Labs
+        <% end %>
       </nav>
     </header>
 

@@ -3,15 +3,17 @@
  * Page structure, containers, grid systems.
  */
 @layer base {
-  /* body {
+  body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100dvh;
-  } */
+  }
 
-  /* #main {
+  #main {
     margin-inline: auto;
-    max-inline-size: var(--main-width);
-    padding-inline: var(--main-padding);
-  } */
+    max-inline-size: 100ch;
+    padding-inline: 1.5rem;
+    padding-block: 1rem;
+    width: 100%;
+  }
 }

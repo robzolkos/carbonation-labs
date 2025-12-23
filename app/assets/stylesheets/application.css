@@ -3,6 +3,7 @@
  * Imports all CSS files in the correct layer order.
  */
 @import "_global.css";
+@import "fonts.css";
 @import "colors.css";
 @import "reset.css";
 @import "base.css";

@@ -3,26 +3,88 @@
  * Text inputs, selects, textareas, checkboxes, switches.
  */
 @layer components {
-  /* Text inputs */
-  /* .input {
-    border-radius: 0.5em;
-    border: 1px solid var(--color-ink-medium);
-    font-size: max(16px, 1em);
-    padding: 0.5em 0.8em;
+  /* Field wrapper */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-block: 1rem;
+  }
+
+  /* Labels */
+  .field label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  /* Text inputs and textareas */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="url"],
+  input[type="search"],
+  textarea {
+    background: var(--color-background);
+    border: 2px solid var(--color-heading);
+    border-radius: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
     width: 100%;
-  } */
+  }
 
-  /* .input:focus {
-    outline: var(--focus-ring);
-    outline-offset: -1px;
-  } */
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
 
-  /* Select dropdowns */
-  /* .input--select {} */
+  input:focus,
+  textarea:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: var(--color-accent-dark);
+  }
 
-  /* Textareas */
-  /* .input--textarea {} */
+  input::placeholder,
+  textarea::placeholder {
+    color: #888;
+    opacity: 1;
+  }
 
-  /* Switches/toggles */
-  /* .switch {} */
+  /* Actions wrapper */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-block: 1.5rem;
+  }
+
+  .actions a {
+    font-family: var(--font-body);
+  }
+
+  /* Errors */
+  .errors {
+    background: #fee2e2;
+    border: 2px solid #dc2626;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-block: 1rem;
+  }
+
+  .errors h2 {
+    color: #dc2626;
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .errors ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .errors li {
+    color: #dc2626;
+  }
 }

@@ -34,9 +34,8 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Create Board in Fizzy" %>
+    <%= link_to "Cancel", root_path %>
     <%= link_to "Start Over", new_board_bootstrap_path %>
+    <%= form.submit "Create Board in Fizzy" %>
   </div>
 <% end %>
-
-<p><%= link_to "Back to Labs", root_path %></p>
