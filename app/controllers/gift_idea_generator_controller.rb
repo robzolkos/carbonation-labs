@@ -75,6 +75,6 @@ class GiftIdeaGeneratorController < ApplicationController
 
     def fizzy_board_url(board_id)
       account_slug = ENV["FIZZY_ACCOUNT_SLUG"]
-      "https://fizzy.do/#{account_slug}/boards/#{board_id}"
+      "https://app.fizzy.do/#{account_slug}/boards/#{board_id}"
     end
 end
