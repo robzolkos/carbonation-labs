@@ -3,8 +3,10 @@ class BoardBootstrap
   include ActiveModel::Attributes
 
   attribute :description, :string
+  attribute :board_name, :string
 
   validates :description, presence: true, length: { minimum: 10 }
+  validates :board_name, presence: true
 
   SYSTEM_PROMPT = <<~PROMPT
     You are an expert at analyzing workflows and suggesting kanban board structures.

@@ -1,41 +1,14 @@
-<h1>Your Board Structure</h1>
-<p>Here's the suggested column structure based on your description:</p>
+<div class="success-page">
+  <h1>Board Created!</h1>
 
-<div class="board-preview">
-  <div class="column column--default">
-    <h3>Not Now</h3>
-    <p class="column-note">Default column</p>
-  </div>
+  <div class="success-card">
+    <p class="success-message">
+      Your board <strong><%= @board["name"] %></strong> has been created with <%= @board["column_count"] %> custom columns.
+    </p>
 
-  <div class="column column--default">
-    <h3>Maybe?</h3>
-    <p class="column-note">Default column</p>
-  </div>
-
-  <% @columns.each do |column| %>
-    <div class="column column--<%= column["color"] %>">
-      <h3><%= column["name"] %></h3>
-      <p class="column-purpose"><%= column["purpose"] %></p>
+    <div class="success-actions">
+      <%= link_to "View Board in Fizzy", @board["url"], class: "btn btn--primary", target: "_blank" %>
+      <%= link_to "Back to Labs", root_path, class: "btn" %>
     </div>
-  <% end %>
-
-  <div class="column column--default">
-    <h3>Done</h3>
-    <p class="column-note">Default column</p>
   </div>
 </div>
-
-<%= form_with url: confirm_board_bootstrap_path, method: :post do |form| %>
-  <%= form.hidden_field :columns, value: @columns.to_json %>
-
-  <div class="field">
-    <%= form.label :board_name, "Board Name" %>
-    <%= form.text_field :board_name, required: true, placeholder: "My New Board" %>
-  </div>
-
-  <div class="actions">
-    <%= link_to "Cancel", root_path %>
-    <%= link_to "Start Over", new_board_bootstrap_path %>
-    <%= form.submit "Create Board in Fizzy" %>
-  </div>
-<% end %>

@@ -8,65 +8,65 @@ class ProcessExtractorController < ApplicationController
 
     if @process_extractor.valid?
       result = @process_extractor.research_process
-      cache_key = "process_extractor:#{SecureRandom.hex(16)}"
-      Rails.cache.write(cache_key, result, expires_in: 1.hour)
-      session[:process_extractor_cache_key] = cache_key
-      session[:process_extractor_description] = @process_extractor.process_description
+      board_info = create_board_with_cards(result)
+
+      session[:process_extractor_board] = board_info
       redirect_to process_extractor_path
     else
       render :new, status: :unprocessable_entity
     end
+  rescue => e
+    Rails.logger.error("ProcessExtractor error: #{e.message}")
+    redirect_to new_process_extractor_path, alert: "Error creating board: #{e.message}"
   end
 
   def show
-    cache_key = session[:process_extractor_cache_key]
-    @result = cache_key ? Rails.cache.read(cache_key) : nil
-    @description = session[:process_extractor_description]
+    @board = session.delete(:process_extractor_board)
 
-    if @result.nil?
-      redirect_to new_process_extractor_path, alert: "No process researched. Please try again."
-    else
-      @board_name = @result["board_name"]
-      @columns = @result["columns"] || []
-      @cards = @result["cards"] || []
+    if @board.nil?
+      redirect_to new_process_extractor_path, alert: "No board found. Please try again."
     end
-  end
-
-  def confirm
-    board_name = params[:board_name]
-    columns = JSON.parse(params[:columns])
-    cards = JSON.parse(params[:cards])
-
-    client = FizzyApiClient::Client.new
-    board = client.create_board(name: board_name)
-
-    columns.each do |column|
-      client.create_column(
-        board_id: board["id"],
-        name: column["name"],
-        color: column["color"].to_sym
-      )
-    end
-
-    cards.each do |card|
-      client.create_card(
-        board_id: board["id"],
-        title: card["title"],
-        description: card["description"]
-      )
-    end
-
-    cache_key = session.delete(:process_extractor_cache_key)
-    Rails.cache.delete(cache_key) if cache_key
-    session.delete(:process_extractor_description)
-    redirect_to root_path, notice: "Board '#{board_name}' created with #{cards.size} cards!"
-  rescue => e
-    redirect_to root_path, alert: "Error creating board: #{e.message}"
   end
 
   private
-
     def process_extractor_params
       params.require(:process_extractor).permit(:process_description)
+    end
+
+    def create_board_with_cards(result)
+      board_name = result["board_name"]
+      columns = result["columns"] || []
+      cards = result["cards"] || []
+
+      client = FizzyApiClient::Client.new
+      board = client.create_board(name: board_name)
+
+      columns.each do |column|
+        client.create_column(
+          board_id: board["id"],
+          name: column["name"],
+          color: column["color"].to_sym
+        )
+      end
+
+      cards.each do |card|
+        client.create_card(
+          board_id: board["id"],
+          title: card["title"],
+          description: card["description"]
+        )
+      end
+
+      {
+        "name" => board_name,
+        "id" => board["id"],
+        "card_count" => cards.size,
+        "url" => fizzy_board_url(board["id"])
+      }
+    end
+
+    def fizzy_board_url(board_id)
+      account_slug = ENV["FIZZY_ACCOUNT_SLUG"]
+      "https://fizzy.do/#{account_slug}/boards/#{board_id}"
     end
 end

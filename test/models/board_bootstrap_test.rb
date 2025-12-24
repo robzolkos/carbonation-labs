@@ -1,21 +1,33 @@
 require "test_helper"
 
 class BoardBootstrapTest < ActiveSupport::TestCase
-  test "valid with description" do
-    bootstrap = BoardBootstrap.new(description: "I want to manage blog posts from idea to published")
+  test "valid with description and board_name" do
+    bootstrap = BoardBootstrap.new(
+      description: "I want to manage blog posts from idea to published",
+      board_name: "My Blog Board"
+    )
     assert bootstrap.valid?
   end
 
   test "invalid without description" do
-    bootstrap = BoardBootstrap.new(description: "")
+    bootstrap = BoardBootstrap.new(description: "", board_name: "My Board")
     assert_not bootstrap.valid?
     assert_includes bootstrap.errors[:description], "can't be blank"
   end
 
   test "invalid with short description" do
-    bootstrap = BoardBootstrap.new(description: "short")
+    bootstrap = BoardBootstrap.new(description: "short", board_name: "My Board")
     assert_not bootstrap.valid?
     assert_includes bootstrap.errors[:description], "is too short (minimum is 10 characters)"
+  end
+
+  test "invalid without board_name" do
+    bootstrap = BoardBootstrap.new(
+      description: "I want to manage blog posts from idea to published",
+      board_name: ""
+    )
+    assert_not bootstrap.valid?
+    assert_includes bootstrap.errors[:board_name], "can't be blank"
   end
 
   test "parse_columns extracts json from response" do

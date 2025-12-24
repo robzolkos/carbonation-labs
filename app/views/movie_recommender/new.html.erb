@@ -1,0 +1,25 @@
+<h1>Movie Recommender</h1>
+<p>Enter movies you love and we'll recommend similar films to add to your watchlist.</p>
+
+<%= form_with model: @movie_recommender, url: movie_recommender_path, method: :post do |form| %>
+  <% if @movie_recommender.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@movie_recommender.errors.count, "error") %> prevented this from being submitted:</h2>
+      <ul>
+        <% @movie_recommender.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :favorite_movies, "What movies do you love?" %>
+    <%= form.text_area :favorite_movies, rows: 5, placeholder: "e.g., Inception, The Matrix, Interstellar, Arrival..." %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Cancel", root_path %>
+    <%= form.submit "Get Recommendations" %>
+  </div>
+<% end %>

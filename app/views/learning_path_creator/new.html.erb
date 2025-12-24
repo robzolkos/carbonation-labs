@@ -1,0 +1,25 @@
+<h1>Learning Path Creator</h1>
+<p>Enter a skill you want to learn and we'll create a structured path from beginner to advanced.</p>
+
+<%= form_with model: @learning_path_creator, url: learning_path_creator_path, method: :post do |form| %>
+  <% if @learning_path_creator.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@learning_path_creator.errors.count, "error") %> prevented this from being submitted:</h2>
+      <ul>
+        <% @learning_path_creator.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :skill_to_learn, "What skill do you want to learn?" %>
+    <%= form.text_area :skill_to_learn, rows: 3, placeholder: "e.g., Python programming, Spanish, Guitar, Machine Learning, Photography..." %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Cancel", root_path %>
+    <%= form.submit "Create Learning Path" %>
+  </div>
+<% end %>

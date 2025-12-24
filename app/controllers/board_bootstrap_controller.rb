@@ -7,46 +7,54 @@ class BoardBootstrapController < ApplicationController
     @board_bootstrap = BoardBootstrap.new(board_bootstrap_params)
 
     if @board_bootstrap.valid?
-      session[:board_bootstrap_columns] = @board_bootstrap.generate_columns
-      session[:board_bootstrap_description] = @board_bootstrap.description
+      columns = @board_bootstrap.generate_columns
+      board_info = create_board_with_columns(@board_bootstrap.board_name, columns)
+
+      session[:board_bootstrap_board] = board_info
       redirect_to board_bootstrap_path
     else
       render :new, status: :unprocessable_entity
     end
+  rescue => e
+    Rails.logger.error("BoardBootstrap error: #{e.message}")
+    redirect_to new_board_bootstrap_path, alert: "Error creating board: #{e.message}"
   end
 
   def show
-    @columns = session[:board_bootstrap_columns]
-    @description = session[:board_bootstrap_description]
+    @board = session.delete(:board_bootstrap_board)
 
-    redirect_to new_board_bootstrap_path, alert: "No columns generated. Please try again." unless @columns
-  end
-
-  def confirm
-    board_name = params[:board_name]
-    columns = JSON.parse(params[:columns])
-
-    client = FizzyApiClient::Client.new
-    board = client.create_board(name: board_name)
-
-    columns.each do |column|
-      client.create_column(
-        board_id: board["id"],
-        name: column["name"],
-        color: column["color"].to_sym
-      )
+    if @board.nil?
+      redirect_to new_board_bootstrap_path, alert: "No board found. Please try again."
     end
-
-    session.delete(:board_bootstrap_columns)
-    session.delete(:board_bootstrap_description)
-    redirect_to root_path, notice: "Board '#{board_name}' created with #{columns.size} custom columns!"
-  rescue => e
-    redirect_to root_path, alert: "Error creating board: #{e.message}"
   end
 
   private
+    def board_bootstrap_params
+      params.require(:board_bootstrap).permit(:description, :board_name)
+    end
 
-  def board_bootstrap_params
-    params.require(:board_bootstrap).permit(:description)
-  end
+    def create_board_with_columns(board_name, columns)
+      client = FizzyApiClient::Client.new
+      board = client.create_board(name: board_name)
+
+      columns.each do |column|
+        client.create_column(
+          board_id: board["id"],
+          name: column["name"],
+          color: column["color"].to_sym
+        )
+      end
+
+      {
+        "name" => board_name,
+        "id" => board["id"],
+        "column_count" => columns.size,
+        "url" => fizzy_board_url(board["id"])
+      }
+    end
+
+    def fizzy_board_url(board_id)
+      account_slug = ENV["FIZZY_ACCOUNT_SLUG"]
+      "https://fizzy.do/#{account_slug}/boards/#{board_id}"
+    end
 end

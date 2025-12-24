@@ -14,6 +14,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :board_name, "Board Name" %>
+    <%= form.text_field :board_name, placeholder: "My New Board" %>
+  </div>
+
+  <div class="field">
     <%= form.label :description, "What do you want to manage?" %>
     <%= form.text_area :description, rows: 5, placeholder: "e.g., I want to track blog post ideas from brainstorming through writing, editing, and publishing..." %>
   </div>

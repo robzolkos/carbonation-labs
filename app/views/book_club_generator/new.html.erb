@@ -1,0 +1,25 @@
+<h1>Book Club Generator</h1>
+<p>Enter books or genres you love and we'll recommend your next great read.</p>
+
+<%= form_with model: @book_club_generator, url: book_club_generator_path, method: :post do |form| %>
+  <% if @book_club_generator.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(@book_club_generator.errors.count, "error") %> prevented this from being submitted:</h2>
+      <ul>
+        <% @book_club_generator.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :favorite_books, "What books or genres do you enjoy?" %>
+    <%= form.text_area :favorite_books, rows: 5, placeholder: "e.g., 1984, Brave New World, dystopian fiction, psychological thrillers..." %>
+  </div>
+
+  <div class="actions">
+    <%= link_to "Cancel", root_path %>
+    <%= form.submit "Get Recommendations" %>
+  </div>
+<% end %>

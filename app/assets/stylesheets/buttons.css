@@ -56,6 +56,18 @@
     color: var(--color-background);
   }
 
+  /* Primary button - emphasized action */
+  .btn--primary {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: white;
+  }
+
+  .btn--primary:hover {
+    background: #15803d;
+    border-color: #15803d;
+  }
+
   /* Danger button - red for destructive actions */
   .btn--danger {
     background: #dc2626;

@@ -15,17 +15,28 @@ Rails.application.routes.draw do
   resources :labs, only: [:index]
 
   # Board Bootstrap Lab
-  resource :board_bootstrap, only: [:new, :create, :show], controller: "board_bootstrap" do
-    post :confirm
-  end
+  resource :board_bootstrap, only: [:new, :create, :show], controller: "board_bootstrap"
 
   # Process Extractor Lab
-  resource :process_extractor, only: [:new, :create, :show], controller: "process_extractor" do
-    post :confirm
-  end
+  resource :process_extractor, only: [:new, :create, :show], controller: "process_extractor"
 
   # Bulk Board Delete Lab
   resource :bulk_board_delete, only: [:show], controller: "bulk_board_delete" do
     delete :destroy
   end
+
+  # Movie Recommender Lab
+  resource :movie_recommender, only: [:new, :create, :show], controller: "movie_recommender"
+
+  # Book Club Generator Lab
+  resource :book_club_generator, only: [:new, :create, :show], controller: "book_club_generator"
+
+  # Gift Idea Generator Lab
+  resource :gift_idea_generator, only: [:new, :create, :show], controller: "gift_idea_generator"
+
+  # Restaurant Bucket List Lab
+  resource :restaurant_bucket_list, only: [:new, :create, :show], controller: "restaurant_bucket_list"
+
+  # Learning Path Creator Lab
+  resource :learning_path_creator, only: [:new, :create, :show], controller: "learning_path_creator"
 end
