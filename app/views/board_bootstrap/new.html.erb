@@ -25,6 +25,6 @@
 
   <div class="actions">
     <%= link_to "Cancel", root_path %>
-    <%= form.submit "Generate Columns" %>
+    <%= form.submit "Generate Columns", data: { turbo_submits_with: "Working..." } %>
   </div>
 <% end %>

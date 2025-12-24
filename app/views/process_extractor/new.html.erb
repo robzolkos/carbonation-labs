@@ -20,6 +20,6 @@
 
   <div class="actions">
     <%= link_to "Cancel", root_path %>
-    <%= form.submit "Research Process" %>
+    <%= form.submit "Research Process", data: { turbo_submits_with: "Working..." } %>
   </div>
 <% end %>
