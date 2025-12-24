@@ -1,6 +1,4 @@
 class MovieRecommenderController < ApplicationController
-  include ImageDownloader
-
   def new
     @movie_recommender = MovieRecommender.new
   end
@@ -52,16 +50,19 @@ class MovieRecommenderController < ApplicationController
 
       items.each do |item|
         description = build_card_description(item)
-        image_path = fetch_movie_image(item["title"], year: item["year"])
 
-        card_params = {
+        card = client.create_card(
           board_id: board["id"],
           title: item["title"],
           description: description
-        }
-        card_params[:image] = image_path if image_path
+        )
 
-        client.create_card(**card_params)
+        FetchCardImageJob.perform_later(
+          card_number: card["number"],
+          title: item["title"],
+          image_type: "movie",
+          year: item["year"]
+        )
       end
 
       {

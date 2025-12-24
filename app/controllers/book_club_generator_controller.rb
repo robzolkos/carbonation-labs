@@ -1,6 +1,4 @@
 class BookClubGeneratorController < ApplicationController
-  include ImageDownloader
-
   def new
     @book_club_generator = BookClubGenerator.new
   end
@@ -52,16 +50,19 @@ class BookClubGeneratorController < ApplicationController
 
       items.each do |item|
         description = build_card_description(item)
-        image_path = fetch_book_image(item["title"], author: item["author"])
 
-        card_params = {
+        card = client.create_card(
           board_id: board["id"],
           title: item["title"],
           description: description
-        }
-        card_params[:image] = image_path if image_path
+        )
 
-        client.create_card(**card_params)
+        FetchCardImageJob.perform_later(
+          card_number: card["number"],
+          title: item["title"],
+          image_type: "book",
+          author: item["author"]
+        )
       end
 
       {
