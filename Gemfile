@@ -47,7 +47,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # Load environment variables from .env file (development only)
-gem "dotenv-rails", groups: [:development]
+gem "dotenv-rails", groups: [ :development ]
 
 # Fizzy API client [https://github.com/robzolkos/fizzy-api-client]
 gem "fizzy-api-client", github: "robzolkos/fizzy-api-client", require: "fizzy_api_client"

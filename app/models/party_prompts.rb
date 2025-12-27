@@ -14,32 +14,32 @@ class PartyPrompts
   validates :prompt_count, numericality: { greater_than: 0, less_than_or_equal_to: 50 }
 
   GAME_TYPES = [
-    ["Charades", "charades"],
-    ["Pictionary", "pictionary"],
-    ["Both", "both"]
+    [ "Charades", "charades" ],
+    [ "Pictionary", "pictionary" ],
+    [ "Both", "both" ]
   ].freeze
 
   CATEGORIES = [
-    ["Movies & TV", "movies_tv"],
-    ["Animals", "animals"],
-    ["Actions & Activities", "actions"],
-    ["Famous People", "famous_people"],
-    ["Food & Drink", "food"],
-    ["Sports", "sports"],
-    ["Random Mix", "random"]
+    [ "Movies & TV", "movies_tv" ],
+    [ "Animals", "animals" ],
+    [ "Actions & Activities", "actions" ],
+    [ "Famous People", "famous_people" ],
+    [ "Food & Drink", "food" ],
+    [ "Sports", "sports" ],
+    [ "Random Mix", "random" ]
   ].freeze
 
   DIFFICULTIES = [
-    ["Easy", "easy"],
-    ["Medium", "medium"],
-    ["Hard", "hard"],
-    ["Mixed", "mixed"]
+    [ "Easy", "easy" ],
+    [ "Medium", "medium" ],
+    [ "Hard", "hard" ],
+    [ "Mixed", "mixed" ]
   ].freeze
 
   TEAM_COLORS = %w[blue pink lime violet aqua tan].freeze
 
   def columns
-    cols = [{ name: "Draw Pile", color: "gray" }]
+    cols = [ { name: "Draw Pile", color: "gray" } ]
 
     team_names.each_with_index do |team, index|
       cols << { name: team, color: TEAM_COLORS[index % TEAM_COLORS.length] }
@@ -49,7 +49,7 @@ class PartyPrompts
   end
 
   def team_names
-    return ["Scored"] if teams.blank?
+    return [ "Scored" ] if teams.blank?
 
     teams.split(",").map(&:strip).reject(&:blank?)
   end

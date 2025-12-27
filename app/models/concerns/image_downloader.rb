@@ -238,8 +238,13 @@ module ImageDownloader
 
     # Extract the dominant color from an image using ImageMagick histogram
     def extract_dominant_color(image_path)
-      # Use histogram to find the most common color
-      result = `magick "#{image_path}" -resize 50x50 -colors 1 -format "%c" histogram:info:-`
+      # Use MiniMagick to safely execute ImageMagick commands
+      image = MiniMagick::Image.open(image_path)
+      image.resize "50x50"
+      image.colors 1
+
+      # Get histogram output
+      result = image.run_command("magick", image.path, "-format", "%c", "histogram:info:-")
 
       # Parse hex color from histogram output like: "1650: (60,76,92) #3C4D5D srgb(...)"
       if result =~ /#([0-9A-Fa-f]{6})/

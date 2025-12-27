@@ -21,13 +21,13 @@ class CardMoverControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should reject empty target board" do
-    post card_mover_path, params: { source_board_ids: ["123"], target_board_id: "" }
+    post card_mover_path, params: { source_board_ids: [ "123" ], target_board_id: "" }
     assert_redirected_to new_card_mover_path
     assert_equal "Please select a target board.", flash[:alert]
   end
 
   test "should reject target in source list" do
-    post card_mover_path, params: { source_board_ids: ["123", "456"], target_board_id: "123" }
+    post card_mover_path, params: { source_board_ids: [ "123", "456" ], target_board_id: "123" }
     assert_redirected_to new_card_mover_path
     assert_equal "Target board cannot also be a source board.", flash[:alert]
   end

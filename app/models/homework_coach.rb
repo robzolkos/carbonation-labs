@@ -9,14 +9,14 @@ class HomeworkCoach
   validates :grade_level, presence: true
 
   GRADE_LEVELS = [
-    ["Elementary (K-2)", "elementary_k2"],
-    ["Elementary (3-5)", "elementary_35"],
-    ["Middle School (6-8)", "middle_school"],
-    ["High School (9-10)", "high_school_910"],
-    ["High School (11-12)", "high_school_1112"],
-    ["College Freshman/Sophomore", "college_underclass"],
-    ["College Junior/Senior", "college_upperclass"],
-    ["Graduate School", "graduate"]
+    [ "Elementary (K-2)", "elementary_k2" ],
+    [ "Elementary (3-5)", "elementary_35" ],
+    [ "Middle School (6-8)", "middle_school" ],
+    [ "High School (9-10)", "high_school_910" ],
+    [ "High School (11-12)", "high_school_1112" ],
+    [ "College Freshman/Sophomore", "college_underclass" ],
+    [ "College Junior/Senior", "college_upperclass" ],
+    [ "Graduate School", "graduate" ]
   ].freeze
 
   COLUMNS = [

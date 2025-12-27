@@ -45,7 +45,7 @@ class CsvToBoard
     end
 
     def build_description_from_row(row)
-      other_columns = row.headers - [title_column]
+      other_columns = row.headers - [ title_column ]
       return "" if other_columns.empty?
 
       html = "<ul>"

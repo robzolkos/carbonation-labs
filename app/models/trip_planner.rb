@@ -10,11 +10,11 @@ class TripPlanner
   validates :trip_length, presence: true
 
   TRIP_LENGTHS = [
-    ["Weekend (2-3 days)", "weekend"],
-    ["Short trip (4-5 days)", "short"],
-    ["One week", "week"],
-    ["Two weeks", "two_weeks"],
-    ["Extended (3+ weeks)", "extended"]
+    [ "Weekend (2-3 days)", "weekend" ],
+    [ "Short trip (4-5 days)", "short" ],
+    [ "One week", "week" ],
+    [ "Two weeks", "two_weeks" ],
+    [ "Extended (3+ weeks)", "extended" ]
   ].freeze
 
   COLUMNS = [
