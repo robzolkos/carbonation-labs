@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.1"
+# Use edge Rails
+gem "rails", github: "rails/rails", branch: "main"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
@@ -23,8 +23,8 @@ gem "jbuilder"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-# Pin minitest to 5.x for Rails 8.1 compatibility
-gem "minitest", "~> 5.25"
+# Minitest 6.x (required by Rails main)
+gem "minitest", "~> 6.0"
 
 # CSV parsing (moved out of standard library in Ruby 3.4)
 gem "csv"
