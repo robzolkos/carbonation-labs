@@ -24,7 +24,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Pin minitest to 5.x for Rails 8.1 compatibility
-gem "minitest", "~> 5.25"
+gem "minitest", "~> 6.0"
 
 # CSV parsing (moved out of standard library in Ruby 3.4)
 gem "csv"
