@@ -4,6 +4,7 @@ require "open-uri"
 require "tempfile"
 require "net/http"
 require "json"
+require "mini_magick"
 
 module ImageDownloader
   extend ActiveSupport::Concern
@@ -11,7 +12,11 @@ module ImageDownloader
   WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php"
   OPEN_LIBRARY_SEARCH = "https://openlibrary.org/search.json"
   OPEN_LIBRARY_COVERS = "https://covers.openlibrary.org/b/id"
-  OMDB_API = "https://www.omdbapi.com"
+  TMDB_API = "https://api.themoviedb.org/3"
+  TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
+
+  CARD_WIDTH = 400
+  CARD_HEIGHT = 100
 
   # Download an image from a URL to a temp file
   def download_image(url)
@@ -34,11 +39,11 @@ module ImageDownloader
     nil
   end
 
-  # Fetch movie poster - tries OMDB (if API key set), then Wikipedia
+  # Fetch movie poster - tries TMDB (if API key set), then Wikipedia
   def fetch_movie_image(title, year: nil)
-    # Try OMDB first if API key is configured
-    if ENV["OMDB_API_KEY"].present?
-      image_path = fetch_omdb_poster(title, year)
+    # Try TMDB first if API key is configured
+    if ENV["TMDB_API_KEY"].present?
+      image_path = fetch_tmdb_poster(title, year)
       return image_path if image_path
     end
 
@@ -70,27 +75,88 @@ module ImageDownloader
     nil
   end
 
+  # Create a card image: dominant color background with poster on the right, title on bottom left
+  # Returns path to the composite image
+  def create_card_image(poster_path, title: nil)
+    return nil if poster_path.blank? || !File.exist?(poster_path)
+
+    # Get dominant color from the poster
+    dominant_color = extract_dominant_color(poster_path)
+    text_color = contrasting_color(dominant_color)
+
+    # Create output file
+    output = Tempfile.new([ "card_image", ".jpg" ])
+
+    # Calculate text area width (leave space for poster ~67px wide at 100px height)
+    text_area_width = CARD_WIDTH - 80
+
+    # Build ImageMagick command
+    cmd = [
+      "magick",
+      "-size", "#{CARD_WIDTH}x#{CARD_HEIGHT}",
+      "xc:#{dominant_color}",
+      "(", poster_path, "-resize", "x#{CARD_HEIGHT}", ")",
+      "-gravity", "East",
+      "-composite"
+    ]
+
+    # Add title text if provided
+    if title.present?
+      display_title = format_title_for_card(title.upcase)
+
+      cmd += [
+        "-gravity", "SouthWest",
+        "-fill", text_color,
+        "-font", "Adwaita-Sans-Bold",
+        "-pointsize", "12",
+        "-annotate", "+15+10", display_title
+      ]
+    end
+
+    cmd << output.path
+
+    result = system(*cmd)
+
+    if result && File.exist?(output.path) && File.size(output.path) > 0
+      Rails.logger.info("Created card image with dominant color #{dominant_color}, text color #{text_color}")
+      output.path
+    else
+      Rails.logger.error("Failed to create card image: magick command failed")
+      poster_path
+    end
+  rescue StandardError => e
+    Rails.logger.error("Failed to create card image: #{e.message}")
+    poster_path # Fall back to original poster
+  end
+
   private
-    # OMDB API for movie posters (requires free API key from omdbapi.com)
-    def fetch_omdb_poster(title, year = nil)
-      uri = URI(OMDB_API)
-      params = {
-        apikey: ENV["OMDB_API_KEY"],
-        t: title,
-        type: "movie"
-      }
-      params[:y] = year if year.present?
+    # TMDB API for movie posters (requires free API key from themoviedb.org)
+    def fetch_tmdb_poster(title, year = nil)
+      uri = URI("#{TMDB_API}/search/movie")
+      params = { query: title }
+      params[:year] = year if year.present?
       uri.query = URI.encode_www_form(params)
 
-      response = Net::HTTP.get(uri)
-      data = JSON.parse(response)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Get.new(uri)
+      request["Authorization"] = "Bearer #{ENV['TMDB_API_KEY']}"
+      request["Accept"] = "application/json"
 
-      return nil unless data["Response"] == "True" && data["Poster"].present? && data["Poster"] != "N/A"
+      response = http.request(request)
+      data = JSON.parse(response.body)
+      results = data["results"]
 
-      Rails.logger.info("OMDB found poster for '#{title}': #{data["Poster"]}")
-      download_image(data["Poster"])
+      return nil if results.nil? || results.empty?
+
+      poster_path = results.first["poster_path"]
+      return nil if poster_path.nil?
+
+      poster_url = "#{TMDB_IMAGE_BASE}#{poster_path}"
+      Rails.logger.info("TMDB found poster for '#{title}': #{poster_url}")
+      download_image(poster_url)
     rescue StandardError => e
-      Rails.logger.error("OMDB fetch failed for '#{title}': #{e.message}")
+      Rails.logger.error("TMDB fetch failed for '#{title}': #{e.message}")
       nil
     end
 
@@ -119,6 +185,73 @@ module ImageDownloader
     rescue StandardError => e
       Rails.logger.error("Open Library fetch failed for '#{title}': #{e.message}")
       nil
+    end
+
+    # Format title for card - split long titles into two balanced lines
+    def format_title_for_card(title)
+      max_line_length = 40
+
+      # If it fits on one line, use as-is
+      return title if title.length <= max_line_length
+
+      # Find a space near the middle to split on
+      words = title.split(" ")
+      mid_point = title.length / 2
+
+      # Build first line until we pass the midpoint
+      line1 = ""
+      line2_words = []
+
+      words.each do |word|
+        test_line = line1.empty? ? word : "#{line1} #{word}"
+        if test_line.length <= mid_point + 5 && line2_words.empty?
+          line1 = test_line
+        else
+          line2_words << word
+        end
+      end
+
+      line2 = line2_words.join(" ")
+
+      # Truncate line2 if still too long
+      if line2.length > max_line_length
+        line2 = line2[0, max_line_length - 3] + "..."
+      end
+
+      "#{line1}\n#{line2}"
+    end
+
+    # Calculate a contrasting color (white or black) based on luminance
+    def contrasting_color(hex_color)
+      # Parse hex color
+      hex = hex_color.delete("#")
+      r = hex[0..1].to_i(16)
+      g = hex[2..3].to_i(16)
+      b = hex[4..5].to_i(16)
+
+      # Calculate relative luminance (per WCAG 2.0)
+      luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+
+      # Return white for dark backgrounds, black for light backgrounds
+      luminance < 0.5 ? "#FFFFFF" : "#000000"
+    end
+
+    # Extract the dominant color from an image using ImageMagick histogram
+    def extract_dominant_color(image_path)
+      # Use histogram to find the most common color
+      result = `magick "#{image_path}" -resize 50x50 -colors 1 -format "%c" histogram:info:-`
+
+      # Parse hex color from histogram output like: "1650: (60,76,92) #3C4D5D srgb(...)"
+      if result =~ /#([0-9A-Fa-f]{6})/
+        color = "##{$1}"
+        Rails.logger.info("Extracted dominant color: #{color}")
+        color
+      else
+        "#333333" # Default dark gray if extraction fails
+      end
+    rescue StandardError => e
+      Rails.logger.error("Failed to extract dominant color: #{e.message}")
+      "#333333"
     end
 
     # Wikipedia API for page images

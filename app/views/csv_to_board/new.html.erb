@@ -1,0 +1,47 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>CSV to Board</h1>
+    <p>Paste your CSV data and turn it into a board with cards.</p>
+
+    <%= form_with model: @csv_to_board, url: csv_to_board_path, method: :post, data: { controller: "csv-preview" } do |form| %>
+      <% if @csv_to_board.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@csv_to_board.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @csv_to_board.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :csv_data, "Paste your CSV data" %>
+        <%= form.text_area :csv_data, rows: 8, placeholder: "name,email,department\nJohn Doe,john@example.com,Engineering\nJane Smith,jane@example.com,Marketing", autofocus: true, data: { csv_preview_target: "input", action: "input->csv-preview#preview" } %>
+        <p class="hint">Include headers in the first row. Comma-separated values.</p>
+      </div>
+
+      <div class="field">
+        <%= form.label :board_name, "Board name" %>
+        <%= form.text_field :board_name, placeholder: "e.g., Team Directory, Product Inventory..." %>
+      </div>
+
+      <div class="field">
+        <%= form.label :title_column, "Which column should be the card title?" %>
+        <%= form.text_field :title_column, placeholder: "e.g., name, title, product..." %>
+        <p class="hint">Enter the exact column header name from your CSV.</p>
+      </div>
+
+      <div class="field">
+        <%= form.label :description_column, "Description column (optional)" %>
+        <%= form.text_field :description_column, placeholder: "e.g., notes, description..." %>
+        <p class="hint">If blank, all other columns will be listed in the description.</p>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Create Board", data: { turbo_submits_with: "Creating..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

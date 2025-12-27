@@ -3,11 +3,19 @@
  * Builds on reset.css with your app's defaults.
  */
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #1e3a5f rgba(255, 255, 255, 0.1);
+  }
+
   body {
     background: var(--color-background);
+    background-attachment: fixed;
     color: var(--color-text);
     font-family: var(--font-body);
     line-height: 1.6;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {

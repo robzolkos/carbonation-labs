@@ -1,0 +1,27 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Board Copier</h1>
+    <p>Copy all columns and cards from an existing board to a new one.</p>
+
+    <%= form_with url: board_copier_path, method: :post, data: { controller: "board-copier" } do |form| %>
+      <div class="field">
+        <%= form.label :source_board_id, "Select board to copy" %>
+        <%= form.select :source_board_id,
+              options_for_select(@boards.map { |b| [b["name"], b["id"], { "data-name" => b["name"] }] }),
+              { prompt: "Choose a board..." },
+              { autofocus: true, data: { action: "change->board-copier#updateName", board_copier_target: "select" } } %>
+        <%= form.hidden_field :source_board_name, data: { board_copier_target: "name" } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :new_board_name, "New board name" %>
+        <%= form.text_field :new_board_name, placeholder: "e.g., Project Board (Copy)" %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Copy Board", data: { turbo_submits_with: "Copying..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

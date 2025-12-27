@@ -39,4 +39,31 @@ Rails.application.routes.draw do
 
   # Learning Path Creator Lab
   resource :learning_path_creator, only: [:new, :create, :show], controller: "learning_path_creator"
+
+  # Movie Quiz Generator Lab
+  resource :movie_quiz_generator, only: [:new, :create, :show], controller: "movie_quiz_generator"
+
+  # Board Copier Lab
+  resource :board_copier, only: [:new, :create, :show], controller: "board_copier"
+
+  # Homework Coach Lab
+  resource :homework_coach, only: [:new, :create, :show], controller: "homework_coach"
+
+  # CSV to Board Lab
+  resource :csv_to_board, only: [:new, :create, :show], controller: "csv_to_board"
+
+  # Trip Planner Lab
+  resource :trip_planner, only: [:new, :create, :show], controller: "trip_planner"
+
+  # Email to Tasks Lab
+  resource :email_to_tasks, only: [:new, :create, :show], controller: "email_to_tasks"
+
+  # Party Prompts Lab (Charades/Pictionary)
+  resource :party_prompts, only: [:new, :create, :show], controller: "party_prompts"
+
+  # Board Merger Lab
+  resource :board_merger, only: [:new, :create, :show], controller: "board_merger"
+
+  # Card Mover Lab
+  resource :card_mover, only: [:new, :create, :show], controller: "card_mover"
 end

@@ -4,18 +4,19 @@
  * Reference: https://oklch.com/
  */
 :root {
-  /* Background - pale yellow post-it note */
-  --color-background: #fffde7;
+  /* Background - blue gradient */
+  --color-background: linear-gradient(180deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+  --color-background-solid: #3b82f6;
 
-  /* Text colors */
-  --color-text: #1a1a1a;
-  --color-heading: #000000;
+  /* Text colors - light for dark background */
+  --color-text: #ffffff;
+  --color-heading: #ffffff;
 
-  /* Accent - light blue for test tube */
+  /* Accent */
   --color-accent: #7dd3fc;
   --color-accent-dark: #0ea5e9;
 
-  /* Links */
-  --color-link: #0369a1;
-  --color-link-hover: #0284c7;
+  /* Links - light for dark background */
+  --color-link: #bfdbfe;
+  --color-link-hover: #ffffff;
 }

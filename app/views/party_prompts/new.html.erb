@@ -1,0 +1,50 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Party Prompts</h1>
+    <p>Generate prompts for Charades, Pictionary, or both!</p>
+
+    <%= form_with model: @party_prompts, url: party_prompts_path, method: :post do |form| %>
+      <% if @party_prompts.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@party_prompts.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @party_prompts.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :game_type, "Game type" %>
+        <%= form.select :game_type, PartyPrompts::GAME_TYPES, { prompt: "Select a game type..." }, { autofocus: true } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :category, "Category" %>
+        <%= form.select :category, PartyPrompts::CATEGORIES, { prompt: "Select a category..." } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :difficulty, "Difficulty" %>
+        <%= form.select :difficulty, PartyPrompts::DIFFICULTIES, { prompt: "Select difficulty..." } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :prompt_count, "How many prompts?" %>
+        <%= form.number_field :prompt_count, min: 5, max: 50, value: 30 %>
+      </div>
+
+      <div class="field">
+        <%= form.label :teams, "Team names (comma-separated)" %>
+        <%= form.text_field :teams, placeholder: "e.g., Team Blue, Team Red, The Actors" %>
+        <p class="hint">Each team becomes a column for scoring. Leave blank for simple scoring.</p>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Generate Prompts", data: { turbo_submits_with: "Generating..." } %>
+      </div>
+    <% end %>
+  </div>
+</div>

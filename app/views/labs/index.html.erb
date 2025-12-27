@@ -1,11 +1,25 @@
-<div class="labs-grid">
-  <% @labs.each do |lab| %>
-    <div class="lab-card">
-      <div class="lab-card__image"></div>
-      <div class="lab-card__content">
-        <h2><%= link_to lab[:name], send(lab[:path]) %></h2>
-        <p><%= lab[:description] %></p>
-      </div>
+<% @categories.each do |category| %>
+  <% labs = @labs_by_category[category[:key]] %>
+  <% next if labs.blank? %>
+
+  <section class="labs-section">
+    <header class="labs-section__header">
+      <h2><%= category[:name] %></h2>
+      <p><%= category[:description] %></p>
+    </header>
+
+    <div class="labs-grid">
+      <% labs.each do |lab| %>
+        <%= link_to send(lab[:path]), class: "lab-card" do %>
+          <div class="lab-card__icon">
+            <%= render "shared/lab_icon", icon: lab[:icon] %>
+          </div>
+          <div class="lab-card__content">
+            <h3><%= lab[:name] %></h3>
+            <p><%= lab[:description] %></p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </section>
+<% end %>

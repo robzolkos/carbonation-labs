@@ -1,25 +1,29 @@
-<h1>Gift Idea Generator</h1>
-<p>Describe the person you're shopping for and we'll suggest perfect gift ideas.</p>
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Gift Idea Generator</h1>
+    <p>Describe the person you're shopping for and we'll suggest perfect gift ideas.</p>
 
-<%= form_with model: @gift_idea_generator, url: gift_idea_generator_path, method: :post do |form| %>
-  <% if @gift_idea_generator.errors.any? %>
-    <div class="errors">
-      <h2><%= pluralize(@gift_idea_generator.errors.count, "error") %> prevented this from being submitted:</h2>
-      <ul>
-        <% @gift_idea_generator.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= form_with model: @gift_idea_generator, url: gift_idea_generator_path, method: :post do |form| %>
+      <% if @gift_idea_generator.errors.any? %>
+        <div class="errors">
+          <h2><%= pluralize(@gift_idea_generator.errors.count, "error") %> prevented this from being submitted:</h2>
+          <ul>
+            <% @gift_idea_generator.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :recipient_description, "Who are you shopping for?" %>
-    <%= form.text_area :recipient_description, rows: 5, placeholder: "e.g., My sister, 28, loves hiking and photography, budget around $50-100, for her birthday..." %>
+      <div class="field">
+        <%= form.label :recipient_description, "Who are you shopping for?" %>
+        <%= form.text_area :recipient_description, rows: 5, placeholder: "e.g., My sister, 28, loves hiking and photography, budget around $50-100, for her birthday...", autofocus: true %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Get Gift Ideas", data: { turbo_submits_with: "Working..." } %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= link_to "Cancel", root_path %>
-    <%= form.submit "Get Gift Ideas", data: { turbo_submits_with: "Working..." } %>
-  </div>
-<% end %>
+</div>

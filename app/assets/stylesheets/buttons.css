@@ -7,10 +7,10 @@
   input[type="submit"],
   .btn {
     align-items: center;
-    background: var(--color-heading);
+    background: #000;
     border-radius: 0.5rem;
-    border: 2px solid var(--color-heading);
-    color: var(--color-background);
+    border: 2px solid #000;
+    color: #fff;
     cursor: pointer;
     display: inline-flex;
     font-family: var(--font-heading);
@@ -26,9 +26,9 @@
   button:hover,
   input[type="submit"]:hover,
   .btn:hover {
-    background: var(--color-link);
-    border-color: var(--color-link);
-    color: var(--color-background);
+    background: #333;
+    border-color: #333;
+    color: #fff;
   }
 
   button:active,
@@ -47,13 +47,13 @@
   /* Secondary button - outline style */
   .btn--secondary {
     background: transparent;
-    border-color: var(--color-heading);
-    color: var(--color-heading);
+    border-color: #fff;
+    color: #fff;
   }
 
   .btn--secondary:hover {
-    background: var(--color-heading);
-    color: var(--color-background);
+    background: #fff;
+    color: #000;
   }
 
   /* Primary button - emphasized action */

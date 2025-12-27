@@ -1,0 +1,33 @@
+<div class="form-page">
+  <div class="form-panel">
+    <h1>Board Merger</h1>
+    <p>Combine all cards from one board into another.</p>
+
+    <%= form_with url: board_merger_path, method: :post do |form| %>
+      <div class="field">
+        <%= form.label :source_board_id, "Source board (cards will be copied from here)" %>
+        <%= form.select :source_board_id,
+              options_for_select(@boards.map { |b| ["#{b["name"]} (#{b["card_count"]} cards)", b["id"]] }),
+              { prompt: "Select source board..." },
+              { autofocus: true } %>
+      </div>
+
+      <div class="field">
+        <%= form.label :target_board_id, "Target board (cards will be added here)" %>
+        <%= form.select :target_board_id,
+              options_for_select(@boards.map { |b| ["#{b["name"]} (#{b["card_count"]} cards)", b["id"]] }),
+              { prompt: "Select target board..." } %>
+      </div>
+
+      <div class="field">
+        <%= form.check_box :delete_source, {}, "1", "0" %>
+        <%= form.label :delete_source, "Delete source board after merging" %>
+      </div>
+
+      <div class="actions">
+        <%= link_to "Cancel", root_path %>
+        <%= form.submit "Merge Boards", data: { turbo_submits_with: "Merging...", turbo_confirm: "This will copy all cards from the source board to the target board. Continue?" } %>
+      </div>
+    <% end %>
+  </div>
+</div>

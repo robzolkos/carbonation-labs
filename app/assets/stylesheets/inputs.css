@@ -3,6 +3,50 @@
  * Text inputs, selects, textareas, checkboxes, switches.
  */
 @layer components {
+  /* Form page wrapper */
+  .form-page {
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  /* Form panel - brutalist card */
+  .form-panel {
+    background: #fff;
+    border: 4px solid #000;
+    padding: 2rem;
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  .form-panel h1 {
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-panel > p {
+    color: #555;
+    text-align: center;
+    text-wrap: balance;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-panel .field label {
+    color: #1a1a1a;
+  }
+
+  .form-panel .hint {
+    color: #666;
+  }
+
+  .form-panel .actions {
+    justify-content: center;
+  }
+
+  .form-panel .actions a {
+    color: #1a1a1a;
+  }
+
   /* Field wrapper */
   .field {
     display: flex;
@@ -18,16 +62,19 @@
     font-size: 1.1rem;
   }
 
-  /* Text inputs and textareas */
+  /* Text inputs, selects, and textareas */
   input[type="text"],
   input[type="email"],
   input[type="password"],
   input[type="url"],
   input[type="search"],
+  input[type="number"],
+  select,
   textarea {
-    background: var(--color-background);
-    border: 2px solid var(--color-heading);
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
+    color: #1a1a1a;
     font-family: var(--font-body);
     font-size: 1rem;
     padding: 0.75rem 1rem;
@@ -40,6 +87,7 @@
   }
 
   input:focus,
+  select:focus,
   textarea:focus {
     outline: 3px solid var(--color-accent);
     outline-offset: 0;

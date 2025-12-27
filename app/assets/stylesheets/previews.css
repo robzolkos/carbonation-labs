@@ -5,7 +5,7 @@
 @layer components {
   /* Hint text */
   .hint {
-    color: #666;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
     margin-block: 0.5rem;
   }
@@ -67,9 +67,15 @@
 
   .card-preview {
     background: white;
-    border: 2px solid var(--color-heading);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.5rem;
     padding: 1rem;
+    color: #333;
+  }
+
+  .card-preview h3,
+  .card-preview .card-title {
+    color: #1a1a1a;
   }
 
   .card-header {
@@ -80,7 +86,7 @@
   }
 
   .card-number {
-    background: var(--color-heading);
+    background: #3b82f6;
     border-radius: 50%;
     color: white;
     display: grid;
@@ -128,9 +134,11 @@
     gap: 0.75rem;
     padding: 0.75rem 1rem;
     background: white;
-    border: 2px solid var(--color-heading);
+    border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
   }
 
   .board-item:has(input:checked) {
@@ -141,43 +149,99 @@
   .board-name {
     font-family: var(--font-heading);
     font-weight: 600;
+    color: #1a1a1a;
+    flex: 1;
   }
 
-  /* Labs grid */
+  .board-count {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  /* Labs sections */
+  .labs-section {
+    margin-bottom: 3rem;
+  }
+
+  .labs-section__header {
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.75rem;
+  }
+
+  .labs-section__header h2 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.25rem 0;
+    color: #fff;
+  }
+
+  .labs-section__header p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Labs grid - brutalist two column */
   .labs-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
   .lab-card {
     display: flex;
-    background: white;
-    border: 2px solid var(--color-heading);
-    border-radius: 0.5rem;
-    overflow: hidden;
+    align-items: flex-start;
+    gap: 1rem;
+    background: #fff;
+    border: 4px solid #000;
+    padding: 1.25rem;
+    text-decoration: none;
+    box-shadow: 6px 6px 0 #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
 
-  .lab-card__image {
-    width: 120px;
-    min-height: 100%;
-    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  .lab-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 #000;
+  }
+
+  .lab-card__icon {
     flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    background: #000;
+    border-radius: 0.5rem;
+    color: #fff;
   }
 
-  .lab-card__content {
-    padding: 1rem 1.25rem;
-    flex: 1;
+  .lab-card__icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
-  .lab-card__content h2 {
-    font-size: 1.25rem;
-    margin: 0 0 0.25rem 0;
+  .lab-card__content h3 {
+    color: #000;
+    font-size: 1.1rem;
+    margin: 0 0 0.35rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   .lab-card__content p {
     margin: 0;
     color: #555;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 700px) {
+    .labs-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Recommendation cards with images */
@@ -191,9 +255,15 @@
   .recommendation-card {
     display: flex;
     background: white;
-    border: 2px solid var(--color-heading);
+    border: none;
     border-radius: 0.5rem;
     overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    color: #333;
+  }
+
+  .recommendation-card__title {
+    color: #1a1a1a;
   }
 
   .recommendation-card__image {
@@ -252,20 +322,39 @@
   .success-page {
     text-align: center;
     padding: 2rem 0;
+    min-height: 80vh;
+    position: relative;
+    z-index: 1;
+  }
+
+  .success-page h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .success-page h1 svg {
+    width: 4rem;
+    height: 2.5rem;
+    flex-shrink: 0;
   }
 
   .success-card {
-    background: #f0fdf4;
-    border: 2px solid #16a34a;
-    border-radius: 0.5rem;
+    background: white;
+    border: 4px solid #000;
     padding: 2rem;
     margin: 2rem auto;
     max-width: 500px;
+    box-shadow: 8px 8px 0 #000;
+    position: relative;
+    z-index: 2;
   }
 
   .success-message {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    color: #333;
   }
 
   .success-actions {

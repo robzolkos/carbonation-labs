@@ -26,6 +26,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Pin minitest to 5.x for Rails 8.1 compatibility
 gem "minitest", "~> 5.25"
 
+# CSV parsing (moved out of standard library in Ruby 3.4)
+gem "csv"
+
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
 gem "solid_queue"

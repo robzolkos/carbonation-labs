@@ -4,7 +4,7 @@ class FetchCardImageJob < ApplicationJob
   include ImageDownloader
 
   def perform(card_number:, title:, image_type:, **options)
-    image_path = case image_type
+    poster_path = case image_type
     when "movie"
       fetch_movie_image(title, year: options[:year])
     when "book"
@@ -13,15 +13,25 @@ class FetchCardImageJob < ApplicationJob
       nil
     end
 
-    if image_path
-      client = FizzyApiClient::Client.new
-      client.update_card(card_number, image: image_path)
-      Rails.logger.info("FetchCardImageJob: Updated card #{card_number} with image")
+    return log_no_image(card_number, title) unless poster_path
+
+    # For movies, create card image with dominant color background and title
+    final_image_path = if image_type == "movie"
+      create_card_image(poster_path, title: title) || poster_path
     else
-      Rails.logger.info("FetchCardImageJob: No image found for card #{card_number} (#{title})")
+      poster_path
     end
+
+    client = FizzyApiClient::Client.new
+    client.update_card(card_number, image: final_image_path)
+    Rails.logger.info("FetchCardImageJob: Updated card #{card_number} with image")
   rescue => e
     Rails.logger.error("FetchCardImageJob error for card #{card_number}: #{e.message}")
     # Don't re-raise - image is optional, card still exists
   end
+
+  private
+    def log_no_image(card_number, title)
+      Rails.logger.info("FetchCardImageJob: No image found for card #{card_number} (#{title})")
+    end
 end
