@@ -30,7 +30,7 @@ A Rails application for experiments with [Fizzy](https://fizzy.do) kanban board 
    ```
 
    Edit `.env` and add your API credentials:
-   - `FIZZY_API_TOKEN` and `FIZZY_ACCOUNT_SLUG` - Get from https://fizzy.do/settings/api
+   - `FIZZY_API_TOKEN` and `FIZZY_ACCOUNT_SLUG`
    - `OPENROUTER_API_KEY` - Get from https://openrouter.ai/keys
    - `TMDB_API_KEY` (optional) - Get from https://www.themoviedb.org/settings/api for movie poster fetching
 
