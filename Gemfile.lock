@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 038c3ededefb7242e444d886714d87fe4feeee71
+  revision: dd1c8848dcde00991f8d198775e08a0b44a95fac
   branch: main
   specs:
     actioncable (8.2.0.alpha)
@@ -31,7 +31,7 @@ GIT
       rack-session (>= 1.0.1)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
+      rails-html-sanitizer (~> 1.7)
       useragent (~> 0.16)
     actiontext (8.2.0.alpha)
       action_text-trix (~> 2.1.16)
@@ -46,10 +46,10 @@ GIT
       builder (~> 3.1)
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
-      rails-html-sanitizer (~> 1.6)
+      rails-html-sanitizer (~> 1.7)
     activejob (8.2.0.alpha)
       activesupport (= 8.2.0.alpha)
-      globalid (>= 0.3.6)
+      globalid (>= 1.4.0)
     activemodel (8.2.0.alpha)
       activesupport (= 8.2.0.alpha)
     activerecord (8.2.0.alpha)
@@ -73,6 +73,7 @@ GIT
       logger (>= 1.4.2)
       minitest (>= 5.1)
       psych (>= 4)
+      ractor-dispatch (>= 0.2.0)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
@@ -215,7 +216,7 @@ GEM
     loofah (2.25.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    mail (2.9.0)
+    mail (2.9.1)
       logger
       mini_mime (>= 0.1.1)
       net-imap
@@ -289,6 +290,7 @@ GEM
       rack (>= 1.3)
     rackup (2.3.1)
       rack (>= 3)
+    ractor-dispatch (0.2.0)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
